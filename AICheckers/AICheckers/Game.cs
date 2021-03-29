@@ -21,7 +21,7 @@ namespace AICheckers {
         }
 
         public bool IsWinForBlack() { return Current.GetHeuristic(true) == int.MaxValue; }
-        public bool IsWinForWhite() { return Current.GetHeuristic(false) == int.MinValue; }
+        public bool IsWinForWhite() { return Current.GetHeuristic(false) == int.MaxValue; }
 
         public void HumanMakeMove(int x, int y, MoveDirection direction) {
             Current.Move(direction, x, y);
@@ -31,7 +31,7 @@ namespace AICheckers {
             Dictionary<int, Node> choices = new Dictionary<int, Node>();
 
             foreach (var child in Current.GetChildren(true)) {
-                int minimaxScore = minimax(child, true, 5, int.MinValue, int.MaxValue);
+                int minimaxScore = minimax(child, true, Current.Depth + 5, int.MinValue, int.MaxValue);
                 if (!choices.ContainsKey(minimaxScore)) {
                     choices.Add(minimaxScore, child);
                 }
