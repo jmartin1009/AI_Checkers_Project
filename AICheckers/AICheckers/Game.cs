@@ -41,7 +41,7 @@ namespace AICheckers {
         }
 
         private int minimax(Node node, bool isBlackTurn, int targetDepth, int a, int b) {
-            if (node.Depth == targetDepth) return node.GetHeuristic(isBlackTurn);
+            if (node.Depth == targetDepth) return node.GetHeuristic(true);
 
             if (isBlackTurn) {
                 int value = int.MinValue;
@@ -54,7 +54,7 @@ namespace AICheckers {
             } else {
                 int value = int.MinValue;
                 foreach (Node child in node.GetChildren(isBlackTurn)) {
-                    value = Math.Max(value, minimax(child, true, targetDepth, a, b));
+                    value = Math.Min(value, minimax(child, true, targetDepth, a, b));
                     b = Math.Min(b, value);
                     if (b <= a) break;
                 }
