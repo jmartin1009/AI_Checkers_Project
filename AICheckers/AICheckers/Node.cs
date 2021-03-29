@@ -70,6 +70,9 @@ namespace AICheckers {
             char marker = tile(x, y);
             List<(int, int)> enemiesJumped = new List<(int, int)>();
 
+            int originalX = x;
+            int originalY = y;
+
             while (moveCondition(direction, ref x, ref y)) {
                 if (tile(x, y) == EMPTY) {
                     tile(x, y, marker);
@@ -82,6 +85,7 @@ namespace AICheckers {
                         if (!move(MoveDirection.NORTH_WEST, x, y, false))
                             if (!move(MoveDirection.SOUTH_EAST, x, y, false))
                                 move(MoveDirection.SOUTH_WEST, x, y, false);
+                    tile(originalX, originalY, EMPTY);
                     return true;
                 } else if (tile(x, y) == marker) return false;
                 else enemiesJumped.Add((x, y));
