@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace AICheckers {
     public partial class Board : Form {
-        private const string BLACK_IMAGE = "fakePath/Black.jpg";
-        private const string WHITE_IMAGE = "fakePath/White.jpg";
-        private const string BLACK_KING_IMAGE = "fakePath/BlackKing.png";
-        private const string WHITE_KING_IMAGE = "fakePath/WhiteKing.png";
-        private const string EMPTY_IMAGE = "fakePath/Empty.jpg";
+        private const string BLACK_IMAGE = "../../Black.jpg";
+        private const string WHITE_IMAGE = "../../White.jpg";
+        private const string BLACK_KING_IMAGE = "../../BlackKing.png";
+        private const string WHITE_KING_IMAGE = "../../WhiteKing.png";
+        private const string EMPTY_IMAGE = "../../Empty.jpg";
 
         private PictureBox[] pictureBoxes;
         private Game game;
