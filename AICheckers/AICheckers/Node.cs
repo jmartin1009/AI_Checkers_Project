@@ -3,27 +3,23 @@ using System.Collections.Generic;
 
 namespace AICheckers {
     public class Node {
-        public const char BLACK = '1';
-        public const char WHITE = '2';
-        public const char EMPTY = '0';
-
-        public char[] Tiles { get; private set; }
+        public Piece[] Tiles { get; private set; }
         public int Depth { get; private set; }
         
-        public Node(char[] tiles) {
+        public Node(Piece[] tiles) {
             Tiles = tiles;
             Depth = 0;
         }
         public Node(Node n) {
-            Tiles = new char[n.Tiles.Length];
+            Tiles = new Piece[n.Tiles.Length];
             Array.Copy(n.Tiles, Tiles, n.Tiles.Length);
             Depth = n.Depth + 1;
         }
 
         // Simple heuristic for right now, just returns the difference in number of pieces.
         public int GetHeuristic(bool forBlack) {
-            int numBlackPieces = getCoordsOfFilledSpots(BLACK).Length;
-            int numWhitePieces = getCoordsOfFilledSpots(WHITE).Length;
+            int numBlackPieces = getCoordsOfFilledSpots(PieceType.BLACK).Length;
+            int numWhitePieces = getCoordsOfFilledSpots(PieceType.WHITE).Length;
 
             if (forBlack) {
                 if (numWhitePieces == 0) {
@@ -48,8 +44,8 @@ namespace AICheckers {
         public List<Node> GetChildren(bool isBlackTurn) {
             List<Node> children = new List<Node>();
 
-            foreach (var coord in getCoordsOfFilledSpots(isBlackTurn ? BLACK : WHITE)) {
-                if (isBlackTurn) {
+            foreach (var coord in getCoordsOfFilledSpots(isBlackTurn ? PieceType.BLACK : PieceType.WHITE)) {
+                if (isBlackTurn || (!isBlackTurn && tile(coord.Item1, coord.Item2).Equals(PieceType.WHITE_KING))) {
                     Node child1 = new Node(this);
                     if (child1.Move(MoveDirection.NORTH_EAST, coord.Item1, coord.Item2)) {
                         children.Add(child1);
@@ -59,7 +55,7 @@ namespace AICheckers {
                         children.Add(child2);
                     }
                 }
-                else {
+                else if (!isBlackTurn || (isBlackTurn && tile(coord.Item1, coord.Item2).Equals(PieceType.BLACK_KING))) {
                     Node child1 = new Node(this);
                     if (child1.Move(MoveDirection.SOUTH_EAST, coord.Item1, coord.Item2)) {
                         children.Add(child1);
@@ -74,19 +70,19 @@ namespace AICheckers {
             return children;
         }
 
-        private (int, int)[] getCoordsOfFilledSpots(char marker) {
+        private (int, int)[] getCoordsOfFilledSpots(PieceType type) {
             List<(int, int)> res = new List<(int, int)>();
 
             for (int x = 1; x <= 8; x++)
                 for (int y = 1; y <= 8; y++)
-                    if (tile(x, y) == marker)
+                    if (tile(x, y).Equals(type))
                         res.Add((x, y));
 
             return res.ToArray();
         }
 
         public bool Move(MoveDirection direction, int x, int y, bool allowedToMoveOnce = true) {
-            char marker = tile(x, y);
+            PieceType type = tile(x, y).Type;
             List<(int, int)> enemiesJumped = new List<(int, int)>();
 
             int originalX = x;
@@ -94,12 +90,12 @@ namespace AICheckers {
 
             while (moveCondition(direction, ref x, ref y)) {
                 // Once we've moved to an empty space this move is basically over.
-                if (tile(x, y) == EMPTY) {
+                if (tile(x, y).Equals(PieceType.EMPTY)) {
                     if (!allowedToMoveOnce && enemiesJumped.Count == 0) return false;
-                    tile(x, y, marker);
+                    tile(x, y, type);
                     // Actually capture the enemies.
                     foreach (var coord in enemiesJumped) {
-                        tile(coord.Item1, coord.Item2, EMPTY);
+                        tile(coord.Item1, coord.Item2, PieceType.EMPTY);
                     }
 
                     if (enemiesJumped.Count > 0) {
@@ -111,11 +107,11 @@ namespace AICheckers {
                     }
 
                     // clear the original tile
-                    tile(originalX, originalY, EMPTY);
+                    tile(originalX, originalY, PieceType.EMPTY);
                     return true;
                 } 
                 // If we run into one of our own pieces this move is invalid.
-                else if (tile(x, y) == marker) return false;
+                else if (tile(x, y).Equals(type)) return false;
                 // enemy piece, add it to the list.
                 else enemiesJumped.Add((x, y));
             }
@@ -138,18 +134,21 @@ namespace AICheckers {
             return false;
         }
 
-        private char tile(int x, int y) {
+        private Piece tile(int x, int y) {
             x -= 1;
             y -= 1;
 
             return Tiles[(y * 8) + x];
         }
 
-        private void tile(int x, int y, char v) {
+        private void tile(int x, int y, PieceType v) {
+            if (v == PieceType.BLACK && y == 1) v = PieceType.BLACK_KING;
+            if (v == PieceType.WHITE && y == 8) v = PieceType.WHITE_KING;
+
             x -= 1;
             y -= 1;
 
-            Tiles[(y * 8) + x] = v;
+            Tiles[(y * 8) + x] = new Piece(v);
         }
     }
 }

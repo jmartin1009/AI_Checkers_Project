@@ -8,15 +8,15 @@ namespace AICheckers {
         public Node Current { get; private set; }
 
         public Game() {
-            Current = new Node(new char[] {
-                Node.EMPTY, Node.WHITE, Node.EMPTY, Node.WHITE, Node.EMPTY, Node.WHITE, Node.EMPTY, Node.WHITE,
-                Node.WHITE, Node.EMPTY, Node.WHITE, Node.EMPTY, Node.WHITE, Node.EMPTY, Node.WHITE, Node.EMPTY,
-                Node.EMPTY, Node.WHITE, Node.EMPTY, Node.WHITE, Node.EMPTY, Node.WHITE, Node.EMPTY, Node.WHITE,
-                Node.EMPTY, Node.EMPTY, Node.EMPTY, Node.EMPTY, Node.EMPTY, Node.EMPTY, Node.EMPTY, Node.EMPTY,
-                Node.EMPTY, Node.EMPTY, Node.EMPTY, Node.EMPTY, Node.EMPTY, Node.EMPTY, Node.EMPTY, Node.EMPTY,
-                Node.BLACK, Node.EMPTY, Node.BLACK, Node.EMPTY, Node.BLACK, Node.EMPTY, Node.BLACK, Node.EMPTY,
-                Node.EMPTY, Node.BLACK, Node.EMPTY, Node.BLACK, Node.EMPTY, Node.BLACK, Node.EMPTY, Node.BLACK,
-                Node.BLACK, Node.EMPTY, Node.BLACK, Node.EMPTY, Node.BLACK, Node.EMPTY, Node.BLACK, Node.EMPTY,
+            Current = new Node(new Piece[] {
+                new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE),
+                new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY),
+                new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE),
+                new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY),
+                new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY),
+                new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY),
+                new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK),
+                new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY),
             });
         }
 

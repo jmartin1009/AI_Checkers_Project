@@ -11,6 +11,8 @@ namespace AICheckers {
     public partial class Board : Form {
         private const string BLACK_IMAGE = "fakePath/Black.jpg";
         private const string WHITE_IMAGE = "fakePath/White.jpg";
+        private const string BLACK_KING_IMAGE = "fakePath/BlackKing.png";
+        private const string WHITE_KING_IMAGE = "fakePath/WhiteKing.png";
         private const string EMPTY_IMAGE = "fakePath/Empty.jpg";
 
         private PictureBox[] pictureBoxes;
@@ -50,7 +52,7 @@ namespace AICheckers {
         private int selectedX = -1;
         private int selectedY = -1;
         private void selectSquare(int x, int y) {
-            if (game.Current.Tiles[(y - 1) * 8 + x - 1] != Node.WHITE) {
+            if (!game.Current.Tiles[(y - 1) * 8 + x - 1].Equals(PieceType.WHITE)) {
                 MessageBox.Show("Select one of your own tiles!");
             } else {
                 selectedX = x;
@@ -60,10 +62,14 @@ namespace AICheckers {
 
         private void refreshBoxes() {
             for (int i = 0; i < pictureBoxes.Length; i++) {
-                if (game.Current.Tiles[i] == Node.BLACK)
+                if (game.Current.Tiles[i].Type == PieceType.BLACK)
                     pictureBoxes[i].Load(BLACK_IMAGE);
-                else if (game.Current.Tiles[i] == Node.WHITE)
+                else if (game.Current.Tiles[i].Type == PieceType.WHITE)
                     pictureBoxes[i].Load(WHITE_IMAGE);
+                else if (game.Current.Tiles[i].Type == PieceType.BLACK_KING)
+                    pictureBoxes[i].Load(BLACK_KING_IMAGE);
+                else if (game.Current.Tiles[i].Type == PieceType.WHITE_KING)
+                    pictureBoxes[i].Load(WHITE_KING_IMAGE);
                 else
                     pictureBoxes[i].Load(EMPTY_IMAGE);
             }
