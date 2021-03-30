@@ -31,7 +31,7 @@ namespace AICheckers {
             Dictionary<int, Node> choices = new Dictionary<int, Node>();
 
             foreach (var child in Current.GetChildren(true)) {
-                int minimaxScore = minimax(child, true, Current.Depth + 5, int.MinValue, int.MaxValue);
+                int minimaxScore = minimax(child, true, Current.Depth + 1, int.MinValue, int.MaxValue);
                 if (!choices.ContainsKey(minimaxScore)) {
                     choices.Add(minimaxScore, child);
                 }

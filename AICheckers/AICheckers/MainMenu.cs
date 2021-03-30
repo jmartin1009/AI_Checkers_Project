@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,10 @@ namespace AICheckers
             newGameBox.Load("../../New_Game.png");
             Board board = new Board();
             board.ShowDialog();
+        }
+
+        private void githubBox_MouseUp(object sender, MouseEventArgs e) {
+            Process.Start("https://github.com/jmartin1009/AI_Checkers_Project");
         }
     }
 }
