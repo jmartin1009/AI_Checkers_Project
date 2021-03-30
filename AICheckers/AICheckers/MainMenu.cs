@@ -12,9 +12,12 @@ namespace AICheckers
 {
     public partial class MainMenu : Form
     {
+        private Difficulty.difficulty diff;
         public MainMenu()
         {
             InitializeComponent();
+            this.diff = Difficulty.difficulty.EASY;
+            difficultyBox.Load("../../Difficulty_Easy.png");
         }
 
         private void newGameBox_MouseDown(object sender, MouseEventArgs e)
@@ -31,6 +34,46 @@ namespace AICheckers
 
         private void githubBox_MouseUp(object sender, MouseEventArgs e) {
             Process.Start("https://github.com/jmartin1009/AI_Checkers_Project");
+        }
+
+        private void difficultyBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            switch(diff)
+            {
+                case Difficulty.difficulty.EASY:
+                    difficultyBox.Load("../../Difficulty_Easy_OnClick.png");
+                    break;
+                case Difficulty.difficulty.MEDIUM:
+                    difficultyBox.Load("../../Difficulty_Medium_OnClick.png");
+                    break;
+                case Difficulty.difficulty.HARD:
+                    difficultyBox.Load("../../Difficulty_Hard_OnClick.png");
+                    break;
+            }
+        }
+
+        private void difficultyBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            switch (diff)
+            {
+                case Difficulty.difficulty.EASY:
+                    difficultyBox.Load("../../Difficulty_Medium.png");
+                    this.diff = Difficulty.difficulty.MEDIUM;
+                    break;
+                case Difficulty.difficulty.MEDIUM:
+                    difficultyBox.Load("../../Difficulty_Hard.png");
+                    this.diff = Difficulty.difficulty.HARD;
+                    break;
+                case Difficulty.difficulty.HARD:
+                    difficultyBox.Load("../../Difficulty_Easy.png");
+                    this.diff = Difficulty.difficulty.EASY;
+                    break;
+            }
+        }
+
+        private void exitBox_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }
