@@ -83,7 +83,7 @@ namespace AICheckers {
 
         public bool Move(MoveDirection direction, int x, int y, bool allowedToMoveOnce = true) {
             PieceType type = tile(x, y).Type;
-            List<(int, int)> enemiesJumped = new List<(int, int)>();
+            (int, int) jumpedEnemy = (-1, -1);
 
             int originalX = x;
             int originalY = y;
@@ -91,14 +91,14 @@ namespace AICheckers {
             while (moveCondition(direction, ref x, ref y)) {
                 // Once we've moved to an empty space this move is basically over.
                 if (tile(x, y).Equals(PieceType.EMPTY)) {
-                    if (!allowedToMoveOnce && enemiesJumped.Count == 0) return false;
-                    tile(x, y, type);
-                    // Actually capture the enemies.
-                    foreach (var coord in enemiesJumped) {
-                        tile(coord.Item1, coord.Item2, PieceType.EMPTY);
-                    }
+                    if (!allowedToMoveOnce && jumpedEnemy.Item1 == -1) return false;
 
-                    if (enemiesJumped.Count > 0) {
+                    tile(x, y, type);
+
+                    // Actually capture the enemies.
+                    if (jumpedEnemy.Item1 != -1) {
+                        tile(jumpedEnemy.Item1, jumpedEnemy.Item2, PieceType.EMPTY);
+
                         // Try to get a killstreak in every direction
                         if (!Move(MoveDirection.NORTH_EAST, x, y, false))
                             if (!Move(MoveDirection.NORTH_WEST, x, y, false))
@@ -109,11 +109,11 @@ namespace AICheckers {
                     // clear the original tile
                     tile(originalX, originalY, PieceType.EMPTY);
                     return true;
-                } 
+                }
                 // If we run into one of our own pieces this move is invalid.
                 else if (tile(x, y).Equals(type)) return false;
                 // enemy piece, add it to the list.
-                else enemiesJumped.Add((x, y));
+                else jumpedEnemy = (x, y);
             }
             // Exceeded the bounds of the board, invalid move.
             return false;
