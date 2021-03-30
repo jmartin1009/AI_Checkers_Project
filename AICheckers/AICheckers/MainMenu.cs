@@ -15,5 +15,17 @@ namespace AICheckers
         {
             InitializeComponent();
         }
+
+        private void newGameBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            newGameBox.Load("../../New_Game_OnClick.png");
+        }
+
+        private void newGameBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            newGameBox.Load("../../New_Game.png");
+            Board board = new Board();
+            board.ShowDialog();
+        }
     }
 }
