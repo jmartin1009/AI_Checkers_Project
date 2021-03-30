@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace AICheckers {
     public partial class Board : Form {
-        private const string BLACK_IMAGE = "~/fakePath/black.png";
-        private const string WHITE_IMAGE = "~/fakePath/white.png";
-        private const string EMPTY_IMAGE = "~/fakePath/empty.png";
+        private const string BLACK_IMAGE = "fakePath/Black.jpg";
+        private const string WHITE_IMAGE = "fakePath/White.jpg";
+        private const string EMPTY_IMAGE = "fakePath/Empty.jpg";
 
         private PictureBox[] pictureBoxes;
         private Game game;
@@ -28,6 +28,7 @@ namespace AICheckers {
             for (int x = 0; x < 8; x++) {
                 for (int y = 0; y < 8; y++) {
                     PictureBox pictureBox = new PictureBox();
+                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
                     pictureBox.Left = startX + (x * height + distance);
                     pictureBox.Top = startY + (y * width + distance);
                     pictureBox.Width = width;
@@ -41,23 +42,78 @@ namespace AICheckers {
                 }
             }
 
-            // TODO: populate pictureBoxes.
             game = new Game();
+            game.AIMakeMove();
             refreshBoxes();
         }
 
+        private int selectedX = -1;
+        private int selectedY = -1;
         private void selectSquare(int x, int y) {
-            MessageBox.Show(string.Format("You just clicked ({0}, {1})!", x, y));
+            if (game.Current.Tiles[(y - 1) * 8 + x - 1] != Node.WHITE) {
+                MessageBox.Show("Select one of your own tiles!");
+            } else {
+                selectedX = x;
+                selectedY = y;
+            }
         }
 
         private void refreshBoxes() {
             for (int i = 0; i < pictureBoxes.Length; i++) {
                 if (game.Current.Tiles[i] == Node.BLACK)
-                    pictureBoxes[i].ImageLocation = BLACK_IMAGE;
+                    pictureBoxes[i].Load(BLACK_IMAGE);
                 else if (game.Current.Tiles[i] == Node.WHITE)
-                    pictureBoxes[i].ImageLocation = WHITE_IMAGE;
+                    pictureBoxes[i].Load(WHITE_IMAGE);
                 else
-                    pictureBoxes[i].ImageLocation = EMPTY_IMAGE;
+                    pictureBoxes[i].Load(EMPTY_IMAGE);
+            }
+        }
+
+        private void btnMoveNorthWest_Click(object sender, EventArgs e) {
+            if (selectedX == -1 || selectedY == -1) {
+                MessageBox.Show("Please select a square first!");
+            } else {
+                game.HumanMakeMove(selectedX, selectedY, MoveDirection.NORTH_WEST);
+                game.AIMakeMove();
+                refreshBoxes();
+                selectedX = -1;
+                selectedY = -1;
+            }
+        }
+
+        private void btnMoveNorthEast_Click(object sender, EventArgs e) {
+            if (selectedX == -1 || selectedY == -1) {
+                MessageBox.Show("Please select a square first!");
+            } else {
+                game.HumanMakeMove(selectedX, selectedY, MoveDirection.NORTH_EAST);
+                game.AIMakeMove();
+                refreshBoxes();
+                selectedX = -1;
+                selectedY = -1;
+            }
+        }
+
+        private void btnMoveSouthWest_Click(object sender, EventArgs e) {
+            if (selectedX == -1 || selectedY == -1) {
+                MessageBox.Show("Please select a square first!");
+            } else {
+                game.HumanMakeMove(selectedX, selectedY, MoveDirection.SOUTH_WEST);
+                game.AIMakeMove();
+                refreshBoxes();
+                selectedX = -1;
+                selectedY = -1;
+            }
+        }
+
+        private void btnMoveSouthEast_Click(object sender, EventArgs e) {
+            if (selectedX == -1 || selectedY == -1) {
+                MessageBox.Show("Please select a square first!");
+            } else {
+                game.HumanMakeMove(selectedX, selectedY, MoveDirection.SOUTH_EAST);
+                game.AIMakeMove();
+                refreshBoxes();
+                selectedX = -1;
+                selectedY = -1;
             }
         }
     }
