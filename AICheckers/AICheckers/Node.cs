@@ -55,7 +55,7 @@ namespace AICheckers {
                         children.Add(child2);
                     }
                 }
-                else if (!isBlackTurn || (isBlackTurn && tile(coord.Item1, coord.Item2).Equals(PieceType.BLACK_KING))) {
+                if (!isBlackTurn || (isBlackTurn && tile(coord.Item1, coord.Item2).Equals(PieceType.BLACK_KING))) {
                     Node child1 = new Node(this);
                     if (child1.Move(MoveDirection.SOUTH_EAST, coord.Item1, coord.Item2)) {
                         children.Add(child1);
