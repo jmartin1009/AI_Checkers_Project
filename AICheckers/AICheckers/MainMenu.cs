@@ -12,11 +12,11 @@ namespace AICheckers
 {
     public partial class MainMenu : Form
     {
-        private Difficulty.difficulty diff;
+        private Difficulty difficulty;
         public MainMenu()
         {
             InitializeComponent();
-            this.diff = Difficulty.difficulty.EASY;
+            this.difficulty = Difficulty.EASY;
             difficultyBox.Load("../../Difficulty_Easy.png");
         }
 
@@ -38,15 +38,15 @@ namespace AICheckers
 
         private void difficultyBox_MouseDown(object sender, MouseEventArgs e)
         {
-            switch(diff)
+            switch(this.difficulty)
             {
-                case Difficulty.difficulty.EASY:
+                case Difficulty.EASY:
                     difficultyBox.Load("../../Difficulty_Easy_OnClick.png");
                     break;
-                case Difficulty.difficulty.MEDIUM:
+                case Difficulty.MEDIUM:
                     difficultyBox.Load("../../Difficulty_Medium_OnClick.png");
                     break;
-                case Difficulty.difficulty.HARD:
+                case Difficulty.HARD:
                     difficultyBox.Load("../../Difficulty_Hard_OnClick.png");
                     break;
             }
@@ -54,19 +54,19 @@ namespace AICheckers
 
         private void difficultyBox_MouseUp(object sender, MouseEventArgs e)
         {
-            switch (diff)
+            switch (this.difficulty)
             {
-                case Difficulty.difficulty.EASY:
+                case Difficulty.EASY:
                     difficultyBox.Load("../../Difficulty_Medium.png");
-                    this.diff = Difficulty.difficulty.MEDIUM;
+                    this.difficulty = Difficulty.MEDIUM;
                     break;
-                case Difficulty.difficulty.MEDIUM:
+                case Difficulty.MEDIUM:
                     difficultyBox.Load("../../Difficulty_Hard.png");
-                    this.diff = Difficulty.difficulty.HARD;
+                    this.difficulty = Difficulty.HARD;
                     break;
-                case Difficulty.difficulty.HARD:
+                case Difficulty.HARD:
                     difficultyBox.Load("../../Difficulty_Easy.png");
-                    this.diff = Difficulty.difficulty.EASY;
+                    this.difficulty = Difficulty.EASY;
                     break;
             }
         }

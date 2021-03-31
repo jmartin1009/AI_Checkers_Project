@@ -5,13 +5,10 @@ using System.Text;
 
 namespace AICheckers
 {
-    class Difficulty
+    public enum Difficulty
     {
-        public enum difficulty
-        {
-            EASY,
-            MEDIUM,
-            HARD,
-        }
+        EASY,
+        MEDIUM,
+        HARD,
     }
 }
