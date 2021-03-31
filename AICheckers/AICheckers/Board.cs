@@ -9,11 +9,12 @@ using System.Windows.Forms;
 
 namespace AICheckers {
     public partial class Board : Form {
-        private const string BLACK_IMAGE = "../../Black.jpg";
-        private const string WHITE_IMAGE = "../../White.jpg";
+        private const string BLACK_IMAGE = "../../Black.png";
+        private const string WHITE_IMAGE = "../../White.png";
         private const string BLACK_KING_IMAGE = "../../BlackKing.png";
         private const string WHITE_KING_IMAGE = "../../WhiteKing.png";
         private const string EMPTY_IMAGE = "../../Empty.jpg";
+        private const String EMPTY_BLACK = "../../Black_Board.png";
 
         private PictureBox[] pictureBoxes;
         private Game game;
@@ -61,6 +62,7 @@ namespace AICheckers {
         }
 
         private void refreshBoxes() {
+            bool color = false;
             for (int i = 0; i < pictureBoxes.Length; i++) {
                 if (game.Current.Tiles[i].Type == PieceType.BLACK)
                     pictureBoxes[i].Load(BLACK_IMAGE);
@@ -70,8 +72,12 @@ namespace AICheckers {
                     pictureBoxes[i].Load(BLACK_KING_IMAGE);
                 else if (game.Current.Tiles[i].Type == PieceType.WHITE_KING)
                     pictureBoxes[i].Load(WHITE_KING_IMAGE);
+                else if (color == true)
+                    pictureBoxes[i].Load(EMPTY_BLACK);
                 else
                     pictureBoxes[i].Load(EMPTY_IMAGE);
+                if (!(i > 1 && (i + 1) % 8 == 0))
+                    color = !color;
             }
         }
 
