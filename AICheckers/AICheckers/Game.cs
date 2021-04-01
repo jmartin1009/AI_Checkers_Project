@@ -9,14 +9,14 @@ namespace AICheckers {
 
         public Game() {
             Current = new Node(new Piece[] {
-                new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE),
-                new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY),
-                new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE),
-                new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY),
-                new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY),
-                new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY),
                 new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK),
                 new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY),
+                new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK), new Piece(PieceType.EMPTY), new Piece(PieceType.BLACK),
+                new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY),
+                new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY), new Piece(PieceType.EMPTY),
+                new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY),
+                new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE),
+                new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY), new Piece(PieceType.WHITE), new Piece(PieceType.EMPTY),
             });
         }
 

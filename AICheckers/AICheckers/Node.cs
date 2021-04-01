@@ -45,7 +45,7 @@ namespace AICheckers {
             List<Node> children = new List<Node>();
 
             foreach (var coord in getCoordsOfFilledSpots(isBlackTurn ? PieceType.BLACK : PieceType.WHITE)) {
-                if (isBlackTurn || (!isBlackTurn && tile(coord.Item1, coord.Item2).Equals(PieceType.WHITE_KING))) {
+                if (!isBlackTurn || (isBlackTurn && tile(coord.Item1, coord.Item2).Equals(PieceType.BLACK_KING))) {
                     Node child1 = new Node(this);
                     if (child1.Move(MoveDirection.NORTH_EAST, coord.Item1, coord.Item2)) {
                         children.Add(child1);
@@ -55,7 +55,7 @@ namespace AICheckers {
                         children.Add(child2);
                     }
                 }
-                if (!isBlackTurn || (isBlackTurn && tile(coord.Item1, coord.Item2).Equals(PieceType.BLACK_KING))) {
+                if (isBlackTurn || (!isBlackTurn && tile(coord.Item1, coord.Item2).Equals(PieceType.WHITE_KING))) {
                     Node child1 = new Node(this);
                     if (child1.Move(MoveDirection.SOUTH_EAST, coord.Item1, coord.Item2)) {
                         children.Add(child1);
@@ -142,8 +142,8 @@ namespace AICheckers {
         }
 
         private void tile(int x, int y, PieceType v) {
-            if (v == PieceType.BLACK && y == 1) v = PieceType.BLACK_KING;
-            if (v == PieceType.WHITE && y == 8) v = PieceType.WHITE_KING;
+            if (v == PieceType.BLACK && y == 8) v = PieceType.BLACK_KING;
+            if (v == PieceType.WHITE && y == 1) v = PieceType.WHITE_KING;
 
             x -= 1;
             y -= 1;
